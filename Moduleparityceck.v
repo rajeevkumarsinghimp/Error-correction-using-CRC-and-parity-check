@@ -1,22 +1,10 @@
-module parity_check (
-    input wire [7:0] data_in,
-    output reg error_detected
+// Parity Checker module: Computes the parity of the input data
+module ParityChecker (
+    input wire [14:0] data, // Data input
+    output reg parity       // Parity output
 );
-
-reg parity_bit;
-
-// Calculate even parity bit
-always @* begin
-    parity_bit = ^data_in;  // XOR all bits to get even parity
-end
-
-// Check for error
-always @* begin
-    if (parity_bit != 0) begin
-        error_detected = 1;  // Error detected if parity is incorrect
-    end else begin
-        error_detected = 0;
+    always @* begin
+        parity = ^data; // Compute even parity (XOR all bits together)
     end
-end
-
 endmodule
+
